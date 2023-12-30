@@ -1,9 +1,12 @@
 package com.example.livechatapp.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,7 +28,7 @@ import com.example.livechatapp.DestinationScreen
 import com.example.livechatapp.navigateTo
 
 
-enum class BottomNavigationItem(val icon:ImageVector,val navDestination : DestinationScreen){
+enum class BottomNavigationItem(val icon: ImageVector, val navDestination: DestinationScreen) {
     CHATLIST(
         icon = Icons.Default.Message,
         navDestination = DestinationScreen.ChatList
@@ -39,33 +42,39 @@ enum class BottomNavigationItem(val icon:ImageVector,val navDestination : Destin
         navDestination = DestinationScreen.Profile
     )
 }
+
 @Composable
 fun BottomNavigationMenu(
-    selectedItem : BottomNavigationItem,
+    selectedItem: BottomNavigationItem,
     navController: NavController
 ) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(top = 4.dp)
             .background(Color.White)
-    ){
-        for(item in BottomNavigationItem.values()){
-            Image(imageVector = item.icon,
+    ) {
+        for (item in BottomNavigationItem.entries) {
+            Image(
+                imageVector = item.icon,
                 contentDescription = item.icon.toString(),
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier
+                    .size(40.dp)
                     .padding(4.dp)
                     .weight(1f)
                     .clickable {
-                        navigateTo(navController,item.navDestination.route)
+                        navigateTo(navController, item.navDestination.route)
                     },
-                colorFilter = if(item == selectedItem)
-                                ColorFilter.tint(color = MaterialTheme.colorScheme.inversePrimary) else
-                                ColorFilter.tint(color = Color.White)
+                colorFilter = if (item == selectedItem)
+                    ColorFilter.tint(color = MaterialTheme.colorScheme.inversePrimary) else
+                    ColorFilter.tint(color = MaterialTheme.colorScheme.inverseOnSurface)
             )
         }
 
+
     }
+
 
 }

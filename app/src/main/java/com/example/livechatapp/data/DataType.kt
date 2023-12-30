@@ -1,5 +1,7 @@
 package com.example.livechatapp.data
 
+import java.sql.Timestamp
+
 data class UserData(
     var userId: String ?= "",
     var name: String ?= "",
@@ -14,3 +16,26 @@ data class UserData(
     )
 
 }
+
+data class ChatData(
+    val chatId:String ?= "",
+val user1 : ChatUser = ChatUser(),
+val user2 : ChatUser = ChatUser(),
+)
+data class ChatUser(
+    val  userId:String?="",
+    val  name:String?="",
+    val  imageUrl: String?="",
+    val  number:String?="",
+)
+data class Message(
+    val sender:String?="",
+    val message :String ?="",
+    val timestamp: String?="",
+)
+
+data class Status(
+    val user:ChatUser =ChatUser(),
+    val imageUrl: String?="",
+    val timestamp: Long?=null,
+)
